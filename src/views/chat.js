@@ -25,15 +25,15 @@ export default (state, emit) => {
     createSocketConnection(state, emit)  
   }
  
-  // if(state.chatInitialized) 
+  if(state.chatInitialized) 
     return html `
-      <div> chat box 
+      <div> 
       
-      ${chatInput()}
+      ${chatInput(emit)}
       </div>
     `
 
-  // return html `
-  //  <div> Initializing chat ....</div>
-  // `
+  return html `
+   <div> Initializing chat ....</div>
+  `
 }

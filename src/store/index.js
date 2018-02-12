@@ -1,7 +1,7 @@
 export default (state, emitter) => {
   state.name = 'aswin'
   state.chatInitialized = false
-  
+  state.message = []
   if(!("geolocation" in navigator)) {
     state.geolocation = false
   }else {
@@ -16,6 +16,10 @@ export default (state, emitter) => {
 
   emitter.on('position', (coords) => {
     state.pos = [coords.latitude, coords.longitude]
+  })
+
+  emitter.on('message', (message) => {
+    state.socket.emit('message', message)
   })
 
   emitter.on('error:main', (error) => {
