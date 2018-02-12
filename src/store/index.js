@@ -1,6 +1,7 @@
 export default (state, emitter) => {
   state.name = 'aswin'
-
+  state.chatInitialized = false
+  
   if(!("geolocation" in navigator)) {
     state.geolocation = false
   }else {
@@ -12,7 +13,7 @@ export default (state, emitter) => {
   emitter.on('authToken', (token) => {
     state.token = token
   })
-  
+
   emitter.on('position', (coords) => {
     state.pos = [coords.latitude, coords.longitude]
   })
