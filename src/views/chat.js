@@ -1,34 +1,26 @@
 import html from 'choo/html'
-import io from 'socket.io-client'
 import chatInput from './chatInput'
 
-const createSocketConnection = (state,emit) => {
-  const socket = io('http://localhost:1337/',{query: `auth_token=${state.token}`})
-  socket.on('connect', () => {
-    console.log('connection established')
-  })
-  
-  socket.on('error', (e) => {
-    console.log(e)
-  })
 
-  socket.on('success', (data) => {
-    state.chatInitialized = true
-    state.socket = socket
-    emit('render')
-  })
-}
+
 
 export default (state, emit) => {
 
+  console.log('renrendering')
+  console.log(state.messages)
+  
   if(!state.socket) {
-    createSocketConnection(state, emit)  
+    emit('connectSocket')  
   }
  
   if(state.chatInitialized) 
     return html `
       <div> 
-      
+      <div>
+      ${state.messages.map(msg => {
+        return html `<li> ${msg.user} : ${msg.message} </li>`
+      })}
+      </div>
       ${chatInput(emit)}
       </div>
     `
