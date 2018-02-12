@@ -15,6 +15,9 @@ export default (state, emitter) => {
   
   emitter.on('authToken', (token) => {
     state.token = token
+    sessionStorage['auth_token'] = token
+    emitter.emit('pushState', 'chat')
+    emitter.emit('render')
   })
 
   emitter.on('connectSocket', createSocketConnection(state, emitter))

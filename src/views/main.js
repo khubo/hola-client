@@ -13,18 +13,24 @@ export default function (state, emit) {
     if(!state.pos) {
      return console.log('location not available')
     }
+    
     let position = state.pos
     axios.post('http://localhost:1337/user',{
       username,
       position
     }).then((res, body) => {
       emit('authToken', res.data.token)
-      emit('pushState', 'chat')
     }).catch(e => {
       console.log(e.response)
       emit('error:main', e.response.data)
     })
   }
+
+  setTimeout(() => {
+    if(sessionStorage['auth_token']) {
+    emit('authToken', sessionStorage['auth_token'])
+  }}, 100);
+
 
   return html `
     <div class="header">  
