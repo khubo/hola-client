@@ -18,9 +18,8 @@ export default function (state, emit) {
       username,
       position
     }).then((res, body) => {
+      emit('authToken', res.data.token)
       emit('pushState', 'chat')
-      console.log('logged in ')
-
     }).catch(e => {
       console.log(e.response)
       emit('error:main', e.response.data)

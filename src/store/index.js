@@ -9,6 +9,10 @@ export default (state, emitter) => {
     })
   }
   
+  emitter.on('authToken', (token) => {
+    state.token = token
+  })
+  
   emitter.on('position', (coords) => {
     state.pos = [coords.latitude, coords.longitude]
   })
