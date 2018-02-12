@@ -1,5 +1,6 @@
 import html from 'choo/html'
 import io from 'socket.io-client'
+import chatInput from './chatInput'
 
 const createSocketConnection = (state,emit) => {
   const socket = io('http://localhost:1337/',{query: `auth_token=${state.token}`})
@@ -24,12 +25,15 @@ export default (state, emit) => {
     createSocketConnection(state, emit)  
   }
  
-  if(state.chatInitialized) 
+  // if(state.chatInitialized) 
     return html `
-      <div> chat box </div>
+      <div> chat box 
+      
+      ${chatInput()}
+      </div>
     `
 
-  return html `
-   <div> Initializing chat ....</div>
-  `
+  // return html `
+  //  <div> Initializing chat ....</div>
+  // `
 }
