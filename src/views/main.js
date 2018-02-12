@@ -4,8 +4,6 @@ import redirect from 'choo-redirect'
 
 export default function (state, emit) {
   
-  console.log('new state', state)
-  
   let error = state.mainComponentError
   console.log('error is ', error)
   const login = () => {
@@ -15,13 +13,13 @@ export default function (state, emit) {
     }
     
     let position = state.pos
-    axios.post('http://localhost:1337/user',{
+    axios.post('http://192.168.0.14:1337/user',{
       username,
       position
     }).then((res, body) => {
       emit('authToken', res.data.token)
     }).catch(e => {
-      console.log(e.response)
+      console.log(e)
       emit('error:main', e.response.data)
     })
   }

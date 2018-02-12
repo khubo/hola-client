@@ -37,7 +37,7 @@ export default (state, emitter) => {
 }
 
 const createSocketConnection = (state,emitter) => () => {
-  const socket = io('http://localhost:1337/',{query: `auth_token=${state.token}`})
+  const socket = io('http://192.168.0.14:1337/',{query: `auth_token=${state.token}`})
   socket.on('connect', () => {
     console.log('connection established')
   })
